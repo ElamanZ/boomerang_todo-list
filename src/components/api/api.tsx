@@ -26,12 +26,17 @@ export const createTodo = async (newTodo: { title: string; description: string; 
 
     try {
         const id = generateId();
-        const created = new Date().toISOString().split('T')[0]; // Получение только даты без времени
-        const response = await api.post('/todos', { ...newTodo, id, created }); // Добавление ID и даты создания
+        const created = new Date().toISOString().split('T')[0];
+        const response = await api.post('/todos', { ...newTodo, id, created });
         return response.data;
     } catch (error) {
         console.error('Failed to create todo:', error);
         throw error;
     }
 };
+
+export const getTodos = async (): Promise<Todo[]> => {
+    const response = await api.get('/todos')
+    return response.data
+}
 
