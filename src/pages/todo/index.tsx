@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 import { Button } from "~/components/ui/button"
+import Todos from "~/components/todo/todos";
 
 export default function Home() {
 
@@ -15,6 +16,7 @@ export default function Home() {
         </div>
         <div>
             <h1 className="text-xl font-bold">Todo List</h1>
+            <Todos/>
         </div>
         <Link href="/todo/1">
             Detail Todo
