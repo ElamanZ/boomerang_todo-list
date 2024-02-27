@@ -21,11 +21,12 @@ function Todos() {
 
     if (isLoading) return <div>Загрузка...</div>;
     if (error) return <div>Ошибка: {error.message}</div>;
+    if (todos.length === 0) return <div>Список задач пуст</div>;
 
     return (
         <div className="mx-auto max-w-screen-sm">
             {todos?.map((todo: Todo) => (
-                <div key={todo.id} className="flex justify-between border border-gray-500 border-solid rounded-lg p-2 mt-3">
+                <div onClick={handleCheckboxChange} key={todo.id} className="flex justify-between border border-gray-500 border-solid rounded-lg p-2 mt-3">
                     <label className="flex items-center">
                         <Checkbox id="terms" className="w-9 rounded-full h-9" onChange={handleCheckboxChange}/>
                         <label className="ml-2 text-xl">
