@@ -34,8 +34,8 @@ export default function Page() {
 	};
 	return (
 		<div className='mx-auto max-w-screen-sm p-8'>
-			<Button variant='outline' size='icon' className='w-9 h-5' onClick={() => router.push('/todo')}>
-				<ChevronLeft className='h-4 w-4' />
+			<Button variant='outline' size='icon' className='w-11 h-7 mb-3' onClick={() => router.push('/todo')}>
+				<ChevronLeft className='h-5 w-5' />
 			</Button>
 			<h1 className='mb-4 text-xl font-bold'>Вы можете изменить задачу</h1>
 			<form onSubmit={handleSubmit} className='w-full space-y-2.5'>
@@ -45,7 +45,7 @@ export default function Page() {
 					<div className='mb-1'>Дедлайн</div>
 					<Input className='flex' type='date' name='deadline' defaultValue={todo?.deadline} onChange={handleInputChange}/>
 				</div>
-				<Button type='submit' disabled={!isDataChanged} onClick={() => router.push('/todo')}>
+				<Button type='submit' disabled={!isDataChanged}>
 					Изменить
 				</Button>
 			</form>

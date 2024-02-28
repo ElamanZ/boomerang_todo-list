@@ -1,3 +1,20 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": "1",
+      "title": "Проснуться",
+      "description": "встать в 9 утра",
+      "deadline": "2024-02-28",
+      "created": "2024-02-28",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "title": "Изучать",
+      "description": "Next Js, React Query",
+      "deadline": "2024-02-28",
+      "created": "2024-02-28",
+      "completed": false
+    }
+  ]
 }

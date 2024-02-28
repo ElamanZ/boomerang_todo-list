@@ -43,8 +43,8 @@ const Create: React.FC = () => {
 
     return (
         <div className='mx-auto max-w-screen-sm p-8'>
-            <Button variant='outline' size='icon' className='w-9 h-5' onClick={() => router.push('/todo')}>
-                <ChevronLeft className='h-4 w-4' />
+            <Button variant='outline' size='icon' className='w-11 h-7 mb-3' onClick={() => router.push('/todo')}>
+                <ChevronLeft className='h-5 w-5' />
             </Button>
             <h1 className='mb-4 text-xl font-bold'>Пожалуйста создайте задачу</h1>
             <form className='w-full space-y-2.5' onSubmit={handleSubmit}>

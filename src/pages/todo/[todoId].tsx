@@ -26,8 +26,8 @@ export default function TodoDetailPage() {
 
     return (
         <div className='mx-auto max-w-screen-sm mt-10'>
-            <Button variant='outline' size='icon' className='w-9 h-5' onClick={() => router.push('/todo')}>
-                <ChevronLeft className='h-4 w-4' />
+            <Button variant='outline' size='icon' className='w-11 h-7 mb-3' onClick={() => router.push('/todo')}>
+                <ChevronLeft className='h-5 w-5' />
             </Button>
             <h1 className='mb-4'>Детали задачи</h1>
             <div className=' flex-col justify-between border border-gray-500 border-solid rounded-lg p-2'>
