@@ -6,7 +6,7 @@ import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
 import { createTodo, Todo } from '~/api/api';
-import { toast } from 'sonner';
+import {useToast} from "~/components/ui/use-toast";
 
 const Create: React.FC = () => {
     const router = useRouter();
@@ -14,15 +14,23 @@ const Create: React.FC = () => {
     const [description, setDescription] = useState('');
     const [deadline, setDeadline] = useState('');
 
+    const { toast } = useToast();
+
     const mutation = useMutation<Todo, Error, { title: string; description: string; deadline: string }>({
         mutationFn: createTodo,
         onSuccess: () => {
             router.push('/todo');
-            toast('Задача успешно добавлена!!');
+            toast({
+                title: 'Задача успешно создана!',
+                variant: 'default',
+            });
         },
         onError: error => {
             console.error('Failed to create todo:', error);
-            toast('Ошибка при создании задачи:');
+            toast({
+                title: 'Ошибка при создании новой задачи!',
+                variant: 'destructive',
+            });
         },
     });
 

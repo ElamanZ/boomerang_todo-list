@@ -18,7 +18,7 @@ export const createTodo = async (newTodo: { title: string; description: string; 
 	try {
 		const created = new Date().toISOString().split('T')[0];
 		const todoListData = await api.get('/todos');
-		const newId = `${(+todoListData.data.at(-1)?.id ?? 0) + 1}`;
+		const newId = `${(todoListData.data.length > 0 ? +todoListData.data.at(-1)?.id + 1 : 1)}`;
 		const response = await api.post('/todos', { ...newTodo, id: newId, created, completed: false });
 		return response.data;
 	} catch (error) {
@@ -38,5 +38,10 @@ export const getDetailTodo = async (id: number): Promise<Todo> => {
 
 export const editTodoItem = async ({ id, body }: { id: number; body: Partial<Todo> }) => {
 	const response = await api.patch(`/todos/${id}`, body);
+	return response.data;
+};
+
+export const deleteTodoItem = async ({ id, body }: { id: number; body: Partial<Todo> }) => {
+	const response = await api.delete(`/todos/${id}`, { data: body });
 	return response.data;
 };

@@ -5,6 +5,12 @@ import { X } from "lucide-react"
 
 import { cn } from "~/lib/utils"
 
+const toastColors = {
+    error: "border-red-500 bg-red-100 text-red-900",
+    destructive: "border-orange-500 bg-orange-100 text-orange-900",
+    default: "border-green-500 bg-green-100 text-green-900",
+};
+
 const ToastProvider = ToastPrimitives.Provider
 
 const ToastViewport = React.forwardRef<
@@ -46,7 +52,7 @@ const Toast = React.forwardRef<
   return (
     <ToastPrimitives.Root
       ref={ref}
-      className={cn(toastVariants({ variant }), className)}
+      className={cn(toastVariants({ variant }), toastColors[variant as keyof typeof toastColors])}
       {...props}
     />
   )

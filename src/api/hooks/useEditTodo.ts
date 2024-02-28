@@ -9,11 +9,21 @@ const useEditTodo = ({ isRefreshTodoList = true }: { isRefreshTodoList?: boolean
 
 	const mutation = useMutation({
 		mutationFn: editTodoItem,
-		onSuccess: () => {
-			toast({
-				title: 'Scheduled: Catch up',
-				description: 'Friday, February 10, 2023 at 5:57 PM',
-			});
+		onSuccess: (data, variables) => {
+			const { id, body } = variables;
+			if ('completed' in body) {
+				const message = body.completed ? 'Статус задачи изменен на выполнено!' : 'Статус задачи изменен на невыполнено!';
+				const variant = body.completed ? 'default' : 'destructive';
+				toast({
+					title: message,
+					variant: variant,
+				});
+			} else {
+				toast({
+					title: 'Задача успешно изменена!',
+					variant: 'default',
+				});
+			}
 			if (isRefreshTodoList) queryClient.invalidateQueries({ queryKey: [TODOS_QUERY_KEY] });
 		},
 	});

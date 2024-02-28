@@ -41,7 +41,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, va
         <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
-            {...{ ...props, children: loading ? 'loading' : props.children }}
+            {...{ ...props, children: loading ? 'Загрузка...' : props.children }}
         />
     );
 });

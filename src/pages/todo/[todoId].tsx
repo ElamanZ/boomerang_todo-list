@@ -3,11 +3,24 @@ import { Button } from '~/components/ui/button';
 import React from 'react';
 import { useGetTodo } from '~/api/hooks/useGetTodo';
 import {ChevronLeft} from "lucide-react";
+import useDeleteTodo from "~/api/hooks/useDeleteTodo";
 
 export default function TodoDetailPage() {
     const router = useRouter();
     const { todoId } = router.query;
     const [todo, query] = useGetTodo(+(todoId ?? 0));
+    const [deleteTodo] = useDeleteTodo()
+    const handleDelete = async () => {
+        try {
+            if (todo) {
+                deleteTodo({ id: todo.id, body: {} });
+                router.push('/todo');
+            }
+        } catch (error) {
+            console.error('Failed to delete todo:', error);
+        }
+    };
+
     if (query.isPending) return <h1>Loading...</h1>;
     if (query.error) return <h1>ERROR: {query.error.message}</h1>;
 
@@ -25,10 +38,15 @@ export default function TodoDetailPage() {
                     <p>Описание:</p>
                     <span>{todo?.description}</span>
                 </div>
-                <span className='flex justify-between text-black text-xs mt-3'>
-					<p className='bg-amber-400 border-solid rounded-lg pl-1 pr-1'>Deadline: {todo?.deadline}</p>
-					<p>Created: {todo?.created}</p>
-				</span>
+                <div className='flex justify-between items-center text-black text-sm mt-3'>
+                    <Button onClick={handleDelete}>Удалить задачу</Button>
+                    <div>
+                        <p className='bg-amber-400 border-solid rounded-lg pl-1 pr-1'>Deadline: {todo?.deadline}</p>
+					    <p className="bg-blue-400 border-solid rounded-lg pl-1 pr-1 mt-2">Created: {todo?.created}</p>
+                    </div>
+
+				</div>
+
             </div>
         </div>
     );

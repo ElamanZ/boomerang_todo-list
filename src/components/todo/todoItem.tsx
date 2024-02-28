@@ -5,14 +5,23 @@ import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
 import useEditTodo from '~/api/hooks/useEditTodo';
 import Link from 'next/link';
+import { useToast } from '~/components/ui/use-toast';
+
 
 const TodoItem = ({ todo }: { todo: Todo }) => {
+	const { toast } = useToast();
 	const [mutateTodo] = useEditTodo({ isRefreshTodoList: false });
 	const [isChecked, setIsChecked] = useState<boolean>(todo.completed);
 
 	const handleCheckboxChange = (checked: boolean) => {
+		const message = checked ? 'Статус задачи изменен на выполнено!' : 'Статус задачи изменен на невыполнено!';
+
+		toast({
+			title: message,
+		});
 		setIsChecked(checked);
 		mutateTodo({ id: todo.id, body: { completed: checked } });
+
 	};
 
 	return (
